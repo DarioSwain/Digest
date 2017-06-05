@@ -1,0 +1,16 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    env(DB_HOST): db
+    env(DB_PORT): 5432
+    env(DB_NAME): digest
+    env(DB_USER): root
+    env(DB_PASS): root
+    # A secret key that's used to generate certain security-related tokens
+    env(SECRET): 4b38b8b708f77d8b8c9bbb08b3bc655539af15b6
+
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: ~
+    mailer_password: ~

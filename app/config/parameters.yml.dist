@@ -2,11 +2,9 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    env(DB_HOST): db
-    env(DB_PORT): 5432
-    env(DB_NAME): digest
-    env(DB_USER): root
-    env(DB_PASS): root
+    #Mongo DB
+    env(MONGO_SERVER): mongodb://mongo:27017
+    env(MONGO_DB): digest
     # A secret key that's used to generate certain security-related tokens
     env(SECRET): 4b38b8b708f77d8b8c9bbb08b3bc655539af15b6
 

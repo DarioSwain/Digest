@@ -1,0 +1,14 @@
+DS\Digest\Domain\Digest\Model\Material:
+    fields:
+        id:
+            id: true
+            type: string
+            strategy: NONE
+        title:
+            type: string
+        description:
+            type: string
+        url:
+            type: string
+        createdAt:
+            type: date

@@ -1,6 +1,6 @@
 <?php
 
-namespace DS\Digest\Bundles\DigestBundle;
+namespace DS\Digest\Bundle\DigestBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

@@ -39,20 +39,17 @@ twig:
     strict_variables: '%kernel.debug%'
 
 # Doctrine Configuration
-doctrine:
-    dbal:
-        driver:   pdo_pgsql
-        host:     '%env(DB_HOST)%'
-        port:     '%env(DB_PORT)%'
-        dbname:   '%env(DB_NAME)%_%kernel.environment%'
-        user:     "%env(DB_USER)%"
-        password: "%env(DB_PASS)%"
-        charset:  UTF8
-        server_version: 9.5
-    orm:
-        auto_generate_proxy_classes: '%kernel.debug%'
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+doctrine_mongodb:
+    connections:
+        default:
+            server: "%env(MONGO_SERVER)%"
+            options: {}
+    default_database: "%env(MONGO_DB)%"
+    document_managers:
+        default:
+            mappings:
+                DigestBundle:
+                    prefix: DS\Digest\Domain\Digest\Model
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -61,3 +58,6 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+graphql:
+    schema_class: 'DS\Digest\Bundle\DigestBundle\GraphQL\Schema'

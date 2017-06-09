@@ -1,0 +1,14 @@
+DS\Digest\Domain\Digest\Model\Digest:
+    fields:
+        id:
+            id: true
+            type: string
+            strategy: NONE
+        name:
+            type: string
+        state:
+            type: string
+        createdAt:
+            type: date
+        updatedAt:
+            type: date

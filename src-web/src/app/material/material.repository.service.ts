@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Material} from "./material";
+import { Material } from "./material";
 
 @Injectable()
 export class MaterialRepository {
@@ -14,5 +14,10 @@ export class MaterialRepository {
         ];
 
         return Promise.resolve(materials);
+    }
+
+    getMaterial(id: string): Promise<Material> {
+        return this.getMaterials()
+            .then(materials => materials.find(material => material.id === id));
     }
 }

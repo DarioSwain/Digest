@@ -5,58 +5,26 @@
 
 namespace DS\Digest\Bundle\DigestBundle\GraphQL;
 
-use Youshido\GraphQL\Execution\ResolveInfo;
+use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\AddMaterialField;
+use DS\Digest\Bundle\DigestBundle\GraphQL\Query\MaterialListField;
 use Youshido\GraphQL\Schema\AbstractSchema;
 use Youshido\GraphQL\Config\Schema\SchemaConfig;
-use Youshido\GraphQL\Type\NonNullType;
-use Youshido\GraphQL\Type\Object\ObjectType;
-use Youshido\GraphQL\Type\Scalar\IntType;
-use Youshido\GraphQL\Type\Scalar\StringType;
 
+/**
+ * Class Schema
+ * @package DS\Digest\Bundle\DigestBundle\GraphQL
+ */
 class Schema extends AbstractSchema
 {
+    /** {@inheritdoc} */
     public function build(SchemaConfig $config)
     {
         $config->getQuery()->addFields([
-            'hello' => [
-                'type'    => new StringType(),
-                'args'    => [
-                    'name' => [
-                        'type' => new StringType(),
-                        'default' => 'Stranger'
-                    ]
-                ],
-                'resolve' => function ($context, $args) {
-                    return 'Hello man';// . $args['name'];
-                }
-            ]
+            'materialList' => new MaterialListField(),
         ]);
 
-        $config->setMutation(new ObjectType([
-            'name'   => 'RootMutationType',
-            'fields' => [
-                // defining likePost mutation field
-                'addMaterial' => [
-                    // we specify the output type – simple Int, since it doesn't have a structure
-                    'type'    => new IntType(),
-                    // we need a post ID and we set it to be required Int
-                    'args'    => [
-                        'url' => new NonNullType(new StringType()),
-                        'title' => new StringType(),
-                        'description' => new StringType(),
-                    ],
-                    // simple resolve function that always returns 2
-                    'resolve' => function ($value, array $args, ResolveInfo $info) {
-                        $url = $args['url'] ?? '';
-                        $title = $args['title'] ?? '';
-                        $description = $args['description'] ?? '';
-
-                        dump($url, $title, $description);die;
-
-                        return 2;
-                    },
-                ]
-            ]
-        ]));
+        $config->getMutation()->addFields([
+            'addMaterial' => new AddMaterialField(),
+        ]);
     }
 }

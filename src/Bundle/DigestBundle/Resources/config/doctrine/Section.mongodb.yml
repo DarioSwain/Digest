@@ -1,0 +1,8 @@
+DS\Digest\Domain\Digest\Model\Section:
+    type: embeddedDocument
+    referenceMany:
+        materials:
+          targetDocument: DS\Digest\Domain\Digest\Model\Material
+    fields:
+        name:
+            type: string

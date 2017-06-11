@@ -40,6 +40,14 @@ class Material
     /**
      * @return string
      */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
     public function getUrl(): string
     {
         return $this->url;

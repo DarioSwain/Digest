@@ -1,4 +1,5 @@
 DS\Digest\Domain\Digest\Model\Material:
+    type: document
     fields:
         id:
             id: true

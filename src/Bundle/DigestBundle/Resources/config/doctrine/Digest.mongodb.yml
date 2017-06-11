@@ -1,4 +1,7 @@
 DS\Digest\Domain\Digest\Model\Digest:
+    embedMany:
+        sections:
+          targetDocument: DS\Digest\Domain\Digest\Model\Section
     fields:
         id:
             id: true

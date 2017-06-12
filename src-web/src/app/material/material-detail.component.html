@@ -1,0 +1,16 @@
+<div *ngIf="material">
+    <h2>Material {{material.id}}:</h2>
+    <div><label>id: </label>{{material.id}}</div>
+    <div>
+        <label>Title: </label>
+        <input [(ngModel)]="material.title" placeholder="title"/>
+    </div>
+    <div>
+        <label>Link: </label>
+        <input [(ngModel)]="material.url" placeholder="url"/>
+    </div>
+    <div>
+        <label>Description: </label>
+        <textarea [(ngModel)]='material.description' placeholder="description" rows="5" cols="120"></textarea>
+    </div>
+</div>

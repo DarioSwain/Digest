@@ -1,0 +1,10 @@
+<h1>{{title}}</h1>
+<h2>Available materials</h2>
+<ul class="materials">
+  <li *ngFor="let material of materials"
+      [class.selected]="material === selectedMaterial"
+      (click)="onSelect(material)">
+    <span class="badge">{{material.id}}</span> {{material.url}}
+  </li>
+</ul>
+<material-detail [material]="selectedMaterial"></material-detail>

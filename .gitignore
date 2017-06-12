@@ -15,3 +15,42 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+
+# UI ignores.
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/src-web/dist
+/src-web/tmp
+/src-web/out-tsc
+
+# dependencies
+/src-web/node_modules
+
+# IDEs and editors
+/.idea
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/src-web/.sass-cache
+/src-web/connect.lock
+/src-web/coverage
+/src-web/libpeerconnection.log
+/src-web/npm-debug.log
+/src-web/testem.log
+/src-web/typings
+
+# e2e
+/src-web/e2e/*.js
+/src-web/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db

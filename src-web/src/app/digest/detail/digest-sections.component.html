@@ -1,0 +1,25 @@
+<div *ngIf="sections">
+    <div *ngFor="let section of sections">
+        <h2>Section: {{ section.name }}</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>URL</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let material of section.materials">
+                <td>
+                    <a href="{{ material.url }}" target="_blank">{{ material.title ? material.title : material.url }}</a>
+                </td>
+                <td>{{ material.description }}</td>
+                <td>
+                    <button >Edit</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

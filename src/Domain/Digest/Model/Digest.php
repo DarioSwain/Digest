@@ -97,4 +97,12 @@ class Digest
     {
         return $this->sections;
     }
+
+    /**
+     * @param string $name
+     */
+    public function rename(string $name)
+    {
+        $this->name = $name;
+    }
 }

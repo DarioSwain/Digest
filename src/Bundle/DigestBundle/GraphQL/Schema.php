@@ -8,7 +8,9 @@ namespace DS\Digest\Bundle\DigestBundle\GraphQL;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\AddMaterialField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\AddMaterialToDigestField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\CreateDigestField;
+use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\RenameDigestField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\UpdateMaterialField;
+use DS\Digest\Bundle\DigestBundle\GraphQL\Query\DigestField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Query\DigestListField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Query\MaterialField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Query\MaterialListField;
@@ -28,12 +30,14 @@ class Schema extends AbstractSchema
             'material' => new MaterialField(),
             'materialList' => new MaterialListField(),
             'digestList' => new DigestListField(),
+            'digest' => new DigestField(),
         ]);
 
         $config->getMutation()->addFields([
             'addMaterial' => new AddMaterialField(),
             'updateMaterial' => new UpdateMaterialField(),
             'createDigest' => new CreateDigestField(),
+            'renameDigest' => new RenameDigestField(),
             'addMaterialToDigest' => new AddMaterialToDigestField(),
         ]);
     }

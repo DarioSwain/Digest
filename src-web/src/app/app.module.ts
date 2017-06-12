@@ -7,14 +7,16 @@ import { ApolloModule } from 'apollo-angular';
 
 import { environment } from '../environments/environment';
 
-import { MaterialRepository } from "./material/material.repository.service";
-
 import { AppComponent } from './app.component';
 import { MaterialDetailComponent } from './material/detail/material-detail.component';
 import { MaterialListComponent } from './material/list/material-list.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {DigestListComponent} from "./digest/list/digest-list.component";
+import {ModalComponent} from "./modal/modal.component";
+import {DigestDetailComponent} from "./digest/detail/digest-detail.component";
+import {DigestSectionsComponent} from "./digest/detail/digest-sections.component";
 
 // Create the client as outlined above
 const client = new ApolloClient({
@@ -30,8 +32,12 @@ export function provideClient(): ApolloClient {
 @NgModule({
   declarations: [
     AppComponent,
+    ModalComponent,
     MaterialDetailComponent,
     MaterialListComponent,
+    DigestListComponent,
+    DigestDetailComponent,
+    DigestSectionsComponent,
     NavigationComponent,
     FooterComponent,
     DashboardComponent
@@ -42,7 +48,6 @@ export function provideClient(): ApolloClient {
     AppRoutingModule,
     ApolloModule.forRoot(provideClient)
   ],
-  providers: [ MaterialRepository ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,11 @@
+<div *ngIf="digest">
+    <h2>Digest {{digest.id}}:</h2>
+    <div><label>id: </label>{{digest.id}}</div>
+    <div>
+        <label>Name: </label>
+        <input [(ngModel)]="digest.name" placeholder="name" size="113" />
+    </div>
+    <button (click)="goBack()">Back</button>
+    <button (click)="renameDigest(digest)">Save</button>
+</div>
+<digest-sections [sections]="digest.sections"></digest-sections>

@@ -3,15 +3,16 @@
     <div><label>id: </label>{{material.id}}</div>
     <div>
         <label>Title: </label>
-        <input [(ngModel)]="material.title" placeholder="title"/>
+        <input [(ngModel)]="material.title" placeholder="title" size="113" />
     </div>
     <div>
         <label>Link: </label>
-        <input [(ngModel)]="material.url" placeholder="url"/>
+        <input [(ngModel)]="material.url" placeholder="url"  size="113" />
     </div>
     <div>
         <label>Description: </label>
-        <textarea [(ngModel)]='material.description' placeholder="description" rows="5" cols="120"></textarea>
+        <textarea [(ngModel)]="material.description" placeholder="description" rows="5" cols="120"></textarea>
     </div>
     <button (click)="goBack()">Back</button>
+    <button (click)="updateMaterial(material)">Save</button>
 </div>

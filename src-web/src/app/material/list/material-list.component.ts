@@ -1,35 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import { Material } from '../material';
-import { MaterialRepository } from "../material.repository.service";
 import { Router } from "@angular/router";
+
+import {Apollo, ApolloQueryObservable} from 'apollo-angular';
+import gql from 'graphql-tag';
+import {Subscription} from "rxjs";
+
+const MaterialList = gql`
+  query MaterialList {
+    materialList { 
+      id, 
+      url, 
+      title, 
+      description
+    }
+  }
+`;
 
 @Component({
     selector: 'material-list',
     templateUrl: './material-list.component.html',
 })
+export class MaterialListComponent implements OnInit, OnDestroy {
+    private materialsObs: ApolloQueryObservable<any>;
+    private materialSub: Subscription;
 
-export class MaterialListComponent implements OnInit {
-    materials: Material[];
-    selectedMaterial: Material;
+    public materials: any;
 
-    constructor(
-        private router: Router,
-        private materialRepository: MaterialRepository
-    ) { }
+    constructor(private apollo: Apollo, private router: Router) {}
 
-    getMaterials(): void {
-        this.materialRepository.getMaterials().then(materials => this.materials = materials);
+    ngOnInit() {
+        this.materialsObs = this.apollo.watchQuery({ query: MaterialList });
+        this.materialSub = this.materialsObs.subscribe(({ data, loading}) => {
+            this.materials = data.materialList;
+        }, (error) => {
+            console.log('there was an error sending the query', error);
+        });
     }
 
-    ngOnInit(): void {
-        this.getMaterials();
+    goToEdit(material: Material): void {
+        this.router.navigate(['/materials', material.id]);
     }
 
-    onSelect(material: Material): void {
-        this.selectedMaterial = material;
-    }
-
-    gotoDetail(): void {
-        this.router.navigate(['/materials', this.selectedMaterial.id]);
+    public ngOnDestroy(): void {
+        this.materialSub.unsubscribe();
     }
 }

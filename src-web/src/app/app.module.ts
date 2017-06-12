@@ -2,8 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from "./app-routing.module";
-import { ApolloClient } from 'apollo-client';
+import {ApolloClient, createNetworkInterface} from 'apollo-client';
 import { ApolloModule } from 'apollo-angular';
+
+import { environment } from '../environments/environment';
 
 import { MaterialRepository } from "./material/material.repository.service";
 
@@ -15,12 +17,15 @@ import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 // Create the client as outlined above
-const client = new ApolloClient();
+const client = new ApolloClient({
+  networkInterface: createNetworkInterface({
+    uri: environment.apiPath
+  }),
+});
 
 export function provideClient(): ApolloClient {
     return client;
 }
-
 
 @NgModule({
   declarations: [

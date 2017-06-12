@@ -58,7 +58,7 @@ class Material
      */
     public function getTitle(): string
     {
-        return $this->title;
+        return (string) $this->title;
     }
 
     /**
@@ -66,6 +66,18 @@ class Material
      */
     public function getDescription(): string
     {
-        return $this->description;
+        return (string) $this->description;
+    }
+
+    /**
+     * @param string $url
+     * @param null|string $title
+     * @param null|string $description
+     */
+    public function update(string $url, ?string $title, ?string $description)
+    {
+        $this->url = $url;
+        $this->title = (string) $title;
+        $this->description = (string) $description;
     }
 }

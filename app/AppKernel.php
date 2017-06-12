@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Youshido\GraphQLBundle\GraphQLBundle(),
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
 
             new DS\Digest\Bundle\DigestBundle\DigestBundle(),
         ];

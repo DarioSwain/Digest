@@ -38,8 +38,16 @@ class Digest
             $this->sections->add(new Section($sectionName));
         }
 
-        $section = $this->getSection($sectionName);
-        $section->addMaterial($material);
+        $this->getSection($sectionName)->addMaterial($material);
+    }
+
+    public function removeMaterial(string $sectionName, string $materialId)
+    {
+        if (!$this->hasSection($sectionName)) {
+            return;
+        }
+
+        $this->getSection($sectionName)->removeMaterial($materialId);
     }
 
     public function hasSection(string $sectionName)

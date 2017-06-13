@@ -7,5 +7,6 @@
     </div>
     <button (click)="goBack()">Back</button>
     <button (click)="renameDigest(digest)">Save</button>
+
+    <digest-sections [digest]="digest"></digest-sections>
 </div>
-<digest-sections [sections]="digest.sections"></digest-sections>

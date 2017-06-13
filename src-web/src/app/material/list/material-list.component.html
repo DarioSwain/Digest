@@ -15,6 +15,7 @@
         <td>{{ material.description }}</td>
         <td>
             <button (click)="goToEdit(material)">Edit</button>
+            <add-to-digest [material]="material"></add-to-digest>
         </td>
     </tr>
 </tbody>

@@ -4,6 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from "./app-routing.module";
 import {ApolloClient, createNetworkInterface} from 'apollo-client';
 import { ApolloModule } from 'apollo-angular';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from '../environments/environment';
 
@@ -17,6 +18,8 @@ import {DigestListComponent} from "./digest/list/digest-list.component";
 import {ModalComponent} from "./modal/modal.component";
 import {DigestDetailComponent} from "./digest/detail/digest-detail.component";
 import {DigestSectionsComponent} from "./digest/detail/digest-sections.component";
+import {DigestSelectorComponent} from "./digest/selector/digest-selector.component";
+import {AddToDigestComponent} from "./material/list/add-to-digest-modal.component";
 
 // Create the client as outlined above
 const client = new ApolloClient({
@@ -38,6 +41,8 @@ export function provideClient(): ApolloClient {
     DigestListComponent,
     DigestDetailComponent,
     DigestSectionsComponent,
+    DigestSelectorComponent,
+    AddToDigestComponent,
     NavigationComponent,
     FooterComponent,
     DashboardComponent
@@ -46,8 +51,10 @@ export function provideClient(): ApolloClient {
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    NgbModule.forRoot(),
     ApolloModule.forRoot(provideClient)
   ],
+  entryComponents: [DigestSelectorComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

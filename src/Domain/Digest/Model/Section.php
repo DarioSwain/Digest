@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Section
 {
     protected $name;
+    /** @var ArrayCollection|Material[] */
     protected $materials;
 
     public function __construct(string $name)
@@ -22,6 +23,17 @@ class Section
     public function addMaterial(Material $material)
     {
         $this->materials->add($material);
+    }
+
+    public function removeMaterial(string $materialId)
+    {
+        foreach ($this->materials as $material) {
+            if ($material->getId() === $materialId) {
+                $this->materials->removeElement($material);
+
+                return;
+            }
+        }
     }
 
     /**

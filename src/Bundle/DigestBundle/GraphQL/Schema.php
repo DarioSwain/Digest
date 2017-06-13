@@ -8,6 +8,7 @@ namespace DS\Digest\Bundle\DigestBundle\GraphQL;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\AddMaterialField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\AddMaterialToDigestField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\CreateDigestField;
+use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\RemoveMaterialFromDigestField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\RenameDigestField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Mutation\UpdateMaterialField;
 use DS\Digest\Bundle\DigestBundle\GraphQL\Query\DigestField;
@@ -39,6 +40,7 @@ class Schema extends AbstractSchema
             'createDigest' => new CreateDigestField(),
             'renameDigest' => new RenameDigestField(),
             'addMaterialToDigest' => new AddMaterialToDigestField(),
+            'removeMaterialFromDigest' => new RemoveMaterialFromDigestField(),
         ]);
     }
 }

@@ -55,12 +55,12 @@ export class SelectedResult {
       </div>
       <div class="form-group">
         <label for="digest-selector">Select digest:</label>
-        <select class="form-control" id="digest-selector" [(ngModel)]="selectedDigest" (ngModelChange)="flushError($event)">
+        <select class="form-control" id="digest-selector" [(ngModel)]="selectedDigest" (ngModelChange)="flushError()">
             <option *ngFor="let digest of digests" [ngValue]="digest">{{digest.name}}</option>
         </select>
         <div ngif="selectedDigest.sections">
             <label for="section-selector">Select section:</label>
-            <select class="form-control" id="section-selector" [(ngModel)]="selectedSection" (ngModelChange)="flushError($event)">
+            <select class="form-control" id="section-selector" [(ngModel)]="selectedSection" (ngModelChange)="flushError()">
                 <option *ngFor="let section of selectedDigest.sections" [ngValue]="section">{{section.name}}</option>
             </select>
         </div>
@@ -86,7 +86,7 @@ export class DigestSelectorComponent implements OnInit, OnDestroy {
     private digestObs: ApolloQueryObservable<any>;
     private digestSub: Subscription;
 
-    private componentError: string = null;
+    public componentError: string = null;
 
     @Output() select = new EventEmitter<SelectedResult>();
 
@@ -128,7 +128,7 @@ export class DigestSelectorComponent implements OnInit, OnDestroy {
             return;
         }
 
-        if (!this.selectedDigest.sections.some(section => section === this.selectedSection)) {
+        if (!this.selectedDigest.sections.some((section: Section) => section === this.selectedSection)) {
             this.componentError = "Please choose section.";
 
             return;

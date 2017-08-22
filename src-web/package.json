@@ -8,19 +8,21 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:aot": "ngc -p tsconfig-aot.json && rollup -c rollup-config.js",
+    "live": "live-server ."
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^4.0.0",
-    "@angular/common": "^4.0.0",
-    "@angular/compiler": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/forms": "^4.0.0",
-    "@angular/http": "^4.0.0",
-    "@angular/platform-browser": "^4.0.0",
-    "@angular/platform-browser-dynamic": "^4.0.0",
-    "@angular/router": "^4.0.0",
+    "@angular/animations": "^4.3.0",
+    "@angular/common": "^4.3.0",
+    "@angular/compiler": "^4.3.0",
+    "@angular/core": "^4.3.0",
+    "@angular/forms": "^4.3.0",
+    "@angular/http": "^4.3.0",
+    "@angular/platform-browser": "^4.3.0",
+    "@angular/platform-browser-dynamic": "^4.3.0",
+    "@angular/router": "^4.3.0",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.26",
     "apollo-angular": "^0.13.0",
     "apollo-client": "^1.4.2",
@@ -32,9 +34,10 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
+    "@angular/platform-server": "^4.3.0",
     "@angular/cli": "1.1.1",
-    "@angular/compiler-cli": "^4.0.0",
-    "@angular/language-service": "^4.0.0",
+    "@angular/compiler-cli": "^4.3.0",
+    "@angular/language-service": "^4.3.0",
     "@types/jasmine": "2.5.45",
     "@types/node": "~6.0.60",
     "codelyzer": "~3.0.1",
@@ -49,6 +52,10 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3"
+    "typescript": "~2.3.3",
+    "rollup": "0.48.2",
+    "rollup-plugin-node-resolve": "3.0.0",
+    "rollup-plugin-commonjs": "8.1.0",
+    "rollup-plugin-uglify": "2.0.1"
   }
 }

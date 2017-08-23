@@ -1,0 +1,44 @@
+version: '3.3'
+services:
+#   nginx-proxy:
+#       image: jwilder/nginx-proxy:alpine
+#       ports:
+#         - "80:80"
+#       volumes:
+#         - /var/run/docker.sock:/tmp/docker.sock:ro
+#       restart: always
+
+   nginx:
+       image: nginx:1.12
+       ports:
+           - "80:80"
+       depends_on:
+           - digest
+       volumes:
+           - source_code:/var/www/digest
+#       restart: always
+       command: /bin/bash -c "cat /var/www/digest/docker/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+
+   digest:
+       image: digest
+       build: .
+       depends_on:
+           - mongo
+       restart: always
+       volumes:
+           - source_code:/var/www/digest
+       environment:
+           MONGO_SERVER: 'mongodb://mongo:27017'
+           MONGO_DB: 'digest'
+           SECRET: '4b38b8b708f77d8b8c9bbb08b3bc655539af15b6'
+
+   mongo:
+       image: mongo:3.2
+       restart: always
+volumes:
+  source_code:
+
+#networks:
+#  default:
+#    external:
+#      name: mynet

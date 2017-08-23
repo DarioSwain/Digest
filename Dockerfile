@@ -11,8 +11,9 @@ RUN composer install --ignore-platform-reqs --no-scripts --no-autoloader
 
 FROM php:7.1-fpm-alpine
 RUN apk --no-cache add ca-certificates
-WORKDIR /root/
-COPY --from=frontend-builder /var/www/app/dist ./frontend
-COPY . backend
-COPY --from=backend-builder /var/www/app/vendor ./backend/vendor
-#CMD ["./app"]
+WORKDIR /var/www/digest
+COPY . .
+COPY --from=backend-builder /var/www/app/vendor ./vendor
+COPY --from=frontend-builder /var/www/app/dist ./web/public
+RUN mkdir -p /etc/nginx/conf.d && cp ./docker/nginx.conf /etc/nginx/conf.d/digest.conf
+VOLUME /var/www/digest

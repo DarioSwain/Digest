@@ -1,26 +1,24 @@
 version: '3.3'
 services:
-#   nginx-proxy:
-#       image: jwilder/nginx-proxy:alpine
-#       ports:
-#         - "80:80"
-#       volumes:
-#         - /var/run/docker.sock:/tmp/docker.sock:ro
-#       restart: always
-
    nginx:
        image: nginx:1.12
        ports:
            - "80:80"
        depends_on:
            - digest
+       networks:
+           - reverse-proxy
        volumes:
            - source_code:/var/www/digest
-#       restart: always
+       restart: always
        command: /bin/bash -c "cat /var/www/digest/docker/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+       environment:
+           VIRTUAL_HOST: digest.stampany.com
+           LETSENCRYPT_HOST: digest.stampany.com
+           LETSENCRYPT_EMAIL: dario_swain@yahoo.com
 
    digest:
-       image: digest
+       image: digest:latest
        build: .
        depends_on:
            - mongo
@@ -38,7 +36,7 @@ services:
 volumes:
   source_code:
 
-#networks:
-#  default:
-#    external:
-#      name: mynet
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy

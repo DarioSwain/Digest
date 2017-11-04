@@ -1,2 +1,3 @@
 graphql:
     resource: "@GraphQLBundle/Controller/"
+    prefix: /api

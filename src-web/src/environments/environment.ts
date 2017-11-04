@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiPath: 'http://192.168.33.51:8080/graphql',
+  apiPath: '/api/graphql',
 };

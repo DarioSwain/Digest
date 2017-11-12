@@ -16,6 +16,8 @@
 /vendor/
 /web/bundles/
 
+docker-compose.yml
+
 # UI ignores.
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.

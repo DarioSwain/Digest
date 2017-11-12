@@ -32,6 +32,8 @@ services:
    mongo:
        image: mongo:3.2
        restart: always
+       networks:
+           - digest_default
 volumes:
   source_code:
 

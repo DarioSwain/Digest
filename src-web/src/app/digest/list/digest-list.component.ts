@@ -6,6 +6,8 @@ import {Apollo, ApolloQueryObservable} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {Subscription} from "rxjs";
 import {ModalComponent} from "../../modal/modal.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {CreateDigestModalComponent} from "./create-digest-modal.component";
 
 const DigestList = gql`
   query DigestList {
@@ -33,7 +35,7 @@ export class DigestListComponent implements OnInit, OnDestroy {
 
     public digests: any;
 
-    constructor(private apollo: Apollo, private router: Router) {}
+    constructor(private apollo: Apollo, private router: Router, private modalService: NgbModal) {}
 
     ngOnInit() {
         this.digestObs = this.apollo.watchQuery({ query: DigestList });
@@ -51,5 +53,9 @@ export class DigestListComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.digestSub.unsubscribe();
+    }
+
+    openCreateModal() {
+        this.modalService.open(CreateDigestModalComponent);
     }
 }

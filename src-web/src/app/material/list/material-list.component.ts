@@ -5,6 +5,8 @@ import { Router } from "@angular/router";
 import {Apollo, ApolloQueryObservable} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {Subscription} from "rxjs";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AddMaterialModalComponent} from "./add-material-modal.component";
 
 const MaterialList = gql`
   query MaterialList {
@@ -27,7 +29,7 @@ export class MaterialListComponent implements OnInit, OnDestroy {
 
     public materials: any;
 
-    constructor(private apollo: Apollo, private router: Router) {}
+    constructor(private apollo: Apollo, private router: Router, private modalService: NgbModal) {}
 
     ngOnInit() {
         this.materialsObs = this.apollo.watchQuery({ query: MaterialList });
@@ -44,5 +46,9 @@ export class MaterialListComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.materialSub.unsubscribe();
+    }
+
+    openAddMaterialModal() {
+        this.modalService.open(AddMaterialModalComponent);
     }
 }

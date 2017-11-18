@@ -8,6 +8,7 @@ use DS\Digest\Domain\Digest\Model\Material;
 use Youshido\GraphQL\Config\Field\FieldConfig;
 use Youshido\GraphQL\Execution\ResolveInfo;
 use Youshido\GraphQL\Type\NonNullType;
+use Youshido\GraphQL\Type\Scalar\StringType;
 use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
 
 /**
@@ -26,7 +27,9 @@ class AddMaterialField extends AbstractContainerAwareField
     public function build(FieldConfig $config)
     {
         $config->addArguments([
-            'material' => new NonNullType(new SingleMaterial()),
+            'url' => new NonNullType(new StringType()),
+            'title' => new StringType(),
+            'description' => new StringType(),
         ]);
 
         parent::build($config);
@@ -35,12 +38,10 @@ class AddMaterialField extends AbstractContainerAwareField
     /** {@inheritdoc} */
     public function resolve($value, array $args, ResolveInfo $info)
     {
-        $materialData = $args['material'];
-
         $material = new Material(
-            $materialData['url'],
-            $materialData['title'] ?? '',
-            $materialData['description'] ?? ''
+            $args['url'],
+            $args['title'] ?? '',
+            $args['description'] ?? ''
         );
 
         $documentManager = $this->container->get('doctrine_mongodb.odm.document_manager');

@@ -14,12 +14,14 @@ import { MaterialListComponent } from './material/list/material-list.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {CreateDigestModalComponent} from "./digest/list/create-digest-modal.component";
 import {DigestListComponent} from "./digest/list/digest-list.component";
 import {ModalComponent} from "./modal/modal.component";
 import {DigestDetailComponent} from "./digest/detail/digest-detail.component";
 import {DigestSectionsComponent} from "./digest/detail/digest-sections.component";
 import {DigestSelectorComponent} from "./digest/selector/digest-selector.component";
 import {AddToDigestComponent} from "./material/list/add-to-digest-modal.component";
+import {AddMaterialModalComponent} from "./material/list/add-material-modal.component";
 
 // Create the client as outlined above
 const client = new ApolloClient({
@@ -38,7 +40,9 @@ export function provideClient(): ApolloClient {
     ModalComponent,
     MaterialDetailComponent,
     MaterialListComponent,
+    AddMaterialModalComponent,
     DigestListComponent,
+    CreateDigestModalComponent,
     DigestDetailComponent,
     DigestSectionsComponent,
     DigestSelectorComponent,
@@ -54,7 +58,7 @@ export function provideClient(): ApolloClient {
     NgbModule.forRoot(),
     ApolloModule.forRoot(provideClient)
   ],
-  entryComponents: [DigestSelectorComponent],
+  entryComponents: [DigestSelectorComponent, CreateDigestModalComponent, AddMaterialModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

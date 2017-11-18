@@ -19,8 +19,6 @@ services:
         depends_on:
             - mongo
         restart: always
-        networks:
-            - digest_default
         volumes:
             - ./:/var/www/digest
         environment:
@@ -31,12 +29,11 @@ services:
     mongo:
         image: mongo:3.2
         restart: always
-        networks:
-            - digest_default
 
     node:
-        image: teracy/angular-cli:1.5.0
+        image: teracy/angular-cli:latest
         restart: always
-        command: ng serve --host=0.0.0.0
+        command: /bin/bash -c "npm install && ng serve --host=0.0.0.0 --port 80 --disable-host-check"
+        working_dir: /app/src-web
         volumes:
-            - ./:/var/www/digest
+            - ./:/app

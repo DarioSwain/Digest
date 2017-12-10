@@ -6,8 +6,8 @@ import gql from 'graphql-tag';
 import {Material} from "../material";
 
 const AddMaterial = gql`
-  mutation AddMaterial($url: String!, $title: String, $description: String) {
-    addMaterial(url: $url, title: $title, description: $description){
+  mutation AddMaterial($url: String!, $proposedBy: String, $title: String, $description: String, $language: String, $tags: [String]) {
+    addMaterial(url: $url, title: $title, description: $description, proposedBy: $proposedBy, language: $language, tags: $tags){
         id
     }
   }
@@ -29,10 +29,19 @@ const AddMaterial = gql`
       <div class="form-group">
         <label for="url">URL:</label>
         <input class="form-control" id="url" [(ngModel)]="material.url" (ngModelChange)="flushError()" />
-          <label for="title">Title:</label>
-          <input class="form-control" id="title" [(ngModel)]="material.title" (ngModelChange)="flushError()" />
-          <label for="description">Description:</label>
-          <textarea class="form-control" id="description" [(ngModel)]="material.description" (ngModelChange)="flushError()" ></textarea>
+        <label for="url">Proposed By:</label>
+        <input class="form-control" id="proposed_by" [(ngModel)]="material.proposedBy" (ngModelChange)="flushError()" />
+        <label for="title">Title:</label>
+        <input class="form-control" id="title" [(ngModel)]="material.title" (ngModelChange)="flushError()" />
+        <label for="description">Description:</label>
+        <textarea class="form-control" id="description" [(ngModel)]="material.description" (ngModelChange)="flushError()" ></textarea>
+        <label for="url">Language:</label>
+          <select [(ngModel)]="material.language" (ngModelChange)="flushError()">
+              <option *ngFor="let lang of supportedLanguages" [ngValue]="lang">{{lang}}</option>
+          </select>
+          <br />
+          <label for="url">Tags:</label>
+        <input class="form-control" id="tags" [(ngModel)]="material.tags" (ngModelChange)="flushError()" />
       </div>
     </div>
     <div class="modal-footer">
@@ -43,6 +52,11 @@ const AddMaterial = gql`
 })
 export class AddMaterialModalComponent implements OnInit {
     material: Material = <Material>{};
+
+    public supportedLanguages = [
+        'EN',
+        'RU'
+    ];
 
     public componentError: string = null;
 
@@ -62,8 +76,11 @@ export class AddMaterialModalComponent implements OnInit {
             mutation: AddMaterial,
             variables: {
                 url: this.material.url,
+                proposedBy: this.material.proposedBy,
                 title: this.material.title,
                 description: this.material.description,
+                language: this.material.language,
+                tags: this.material.tags.split(',').map(item => item.trim())
             }
         }).subscribe(({ data }) => {
             console.log(data);

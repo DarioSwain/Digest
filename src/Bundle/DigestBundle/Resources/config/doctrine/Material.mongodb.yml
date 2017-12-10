@@ -11,5 +11,11 @@ DS\Digest\Domain\Digest\Model\Material:
             type: string
         url:
             type: string
+        proposedBy:
+            type: string
+        language:
+            type: string
+        tags:
+            type: collection
         createdAt:
             type: date

@@ -2,6 +2,7 @@
 
 namespace DS\Digest\Bundle\DigestBundle\GraphQL\Type;
 
+use Youshido\GraphQL\Type\ListType\ListType;
 use Youshido\GraphQL\Type\NonNullType;
 use Youshido\GraphQL\Type\Object\AbstractObjectType;
 use Youshido\GraphQL\Type\Scalar\StringType;
@@ -20,6 +21,9 @@ class MaterialType extends AbstractObjectType
             'url' => new NonNullType(new StringType()),
             'title' => new StringType(),
             'description' => new StringType(),
+            'proposedBy' => new StringType(),
+            'language' => new StringType(),
+            'tags' => new ListType(new StringType()),
         ]);
     }
 }

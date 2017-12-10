@@ -25,6 +25,8 @@ services:
             MONGO_SERVER: 'mongodb://mongo:27017'
             MONGO_DB: 'digest'
             SECRET: '4b38b8b708f77d8b8c9bbb08b3bc655539af15b6'
+            SYMFONY_ENV: 'dev'
+            SYMFONY_DEBUG: 'true'
 
     mongo:
         image: mongo:3.2

@@ -13,6 +13,20 @@
         <label>Description: </label>
         <textarea [(ngModel)]="material.description" placeholder="description" rows="5" cols="120"></textarea>
     </div>
+    <div>
+        <label>Proposed by: </label>
+        <input [(ngModel)]="material.proposedBy" placeholder="proposed by" size="113" />
+    </div>
+    <div>
+        <label>Language: </label>
+        <select [(ngModel)]="material.language">
+            <option *ngFor="let lang of supportedLanguages" [ngValue]="lang">{{lang}}</option>
+        </select>
+    </div>
+    <div>
+        <label>Tags (comma separated): </label>
+        <input [(ngModel)]="material.tags" placeholder="tags" />
+    </div>
     <button (click)="goBack()">Back</button>
     <button (click)="updateMaterial(material)">Save</button>
 </div>

@@ -6,6 +6,7 @@ use DS\Digest\Bundle\DigestBundle\GraphQL\Type\MaterialType;
 use DS\Digest\Domain\Digest\Model\Material;
 use Youshido\GraphQL\Config\Field\FieldConfig;
 use Youshido\GraphQL\Execution\ResolveInfo;
+use Youshido\GraphQL\Type\ListType\ListType;
 use Youshido\GraphQL\Type\NonNullType;
 use Youshido\GraphQL\Type\Scalar\StringType;
 use Youshido\GraphQLBundle\Field\AbstractContainerAwareField;
@@ -30,6 +31,10 @@ class UpdateMaterialField extends AbstractContainerAwareField
             'url' => new NonNullType(new StringType()),
             'title' => new StringType(),
             'description' => new StringType(),
+            'proposedBy' => new StringType(),
+            //TODO: Remove duplication, improve types system.
+            'language' => new StringType(),
+            'tags' => new ListType(new StringType()),
         ]);
 
         parent::build($config);
@@ -49,8 +54,11 @@ class UpdateMaterialField extends AbstractContainerAwareField
 
         $material->update(
             $args['url'],
+            $args['proposedBy'] ?? null,
             $args['title'] ?? null,
-            $args['description'] ?? null
+            $args['description'] ?? null,
+            $args['language'] ?? Material::DEFAULT_LANGUAGE,
+            $args['tags'] ?? []
         );
 
         $documentManager->persist($material);

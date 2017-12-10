@@ -11,21 +11,27 @@ import { Material } from "../material";
 const MaterialQuery = gql`
   query Material($id: String!) {
     material(id: $id) {
-      id, 
-      url, 
-      title, 
-      description
+      id,
+      url,
+      proposedBy,
+      title,
+      description,
+      language,
+      tags
     }
   }
 `;
 
 const UpdateMaterialMutation = gql`
-  mutation UpdateMaterial ($id: String!, $url: String!, $title: String, $description: String) {
-    updateMaterial(id: $id, url: $url, title: $title, description: $description) { 
+  mutation UpdateMaterial ($id: String!, $url: String!, $proposedBy: String, $title: String, $description: String, $language: String, $tags: [String]) {
+    updateMaterial(id: $id, url: $url, title: $title, description: $description, proposedBy: $proposedBy, language: $language, tags: $tags) { 
       id, 
       url, 
+      proposedBy,
       title, 
-      description
+      description,
+      language,
+      tags
     }
 }
 `;
@@ -36,6 +42,12 @@ const UpdateMaterialMutation = gql`
 })
 export class MaterialDetailComponent implements OnInit {
     public material: Material = null;
+    //TODO: Move duplicates to separate components
+    public supportedLanguages = [
+        'EN',
+        'RU'
+    ];
+
     private id: Subject<string> = new Subject<string>();
 
     private materialsObs: ApolloQueryObservable<any>;
@@ -55,7 +67,16 @@ export class MaterialDetailComponent implements OnInit {
             }
         });
         this.materialSub = this.materialsObs.subscribe(({ data, loading}) => {
-            this.material = new Material(data.material.id, data.material.url, data.material.title, data.material.description);
+            console.log(data);
+            this.material = new Material(
+                data.material.id,
+                data.material.url,
+                data.material.title,
+                data.material.description,
+                data.material.proposedBy,
+                data.material.language,
+                data.material.tags.join(', ')
+            );
         }, (error) => {
             console.log('there was an error sending the query', error);
         });
@@ -75,8 +96,11 @@ export class MaterialDetailComponent implements OnInit {
             variables: {
                 id: material.id,
                 url: material.url,
+                proposedBy: material.proposedBy,
                 title: material.title,
-                description: material.description
+                description: material.description,
+                language: material.language,
+                tags: material.tags.split(',').map(item => item.trim())
             },
             optimisticResponse: {
                 __typename: 'Mutation',
@@ -84,8 +108,11 @@ export class MaterialDetailComponent implements OnInit {
                     __typename: 'Material',
                     id: material.id,
                     url: material.url,
+                    proposedBy: material.proposedBy,
                     title: material.title,
                     description: material.description,
+                    language: material.language,
+                    tags: material.tags.split(',').map(item => item.trim())
                 },
             },
         }).subscribe(({ data }) => {
